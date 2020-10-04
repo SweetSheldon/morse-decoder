@@ -44,10 +44,17 @@ function decode(expr) {
 
     var clearWords = arrOfTens.map(function(name) {
         if(name =='**********'){return ' '}
-        else{return myDecode((name.replace(/0+/, '')))}
+        else{return(name.slice(name.indexOf('1'),name.length))}
+        // else{return(name.replace(/0+/, ''))}
       });
     
-    var findLetters = clearWords.map(function(morseLetter){
+    var decoded = clearWords.map(function(element){
+        if(element!=' '){
+        return myDecode(element)
+        }else{return ' '}
+    })
+    
+    var findLetters = decoded.map(function(morseLetter){
         if(morseLetter!=" "){
            return MORSE_TABLE[morseLetter]
         }else{return ' '}
@@ -79,8 +86,3 @@ function myDecode(elem){
 module.exports = {
     decode
 }
-
-
-// arr = "00101010100000000010001011101000101110100000111111**********00001011110000111111000010111000101110100000111010"
-// str = arr.replace(/\*+/g, ' ').split(' ');
-// str = str.replace(/0+/, ' ')
